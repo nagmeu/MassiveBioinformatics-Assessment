@@ -1,38 +1,46 @@
+// React ve axios modüllerini import ediyoruz.
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const FilterPanel = ({ setFilters, filters }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [speciesOptions, setSpeciesOptions] = useState([]);
-  const [statusOptions, setStatusOptions] = useState([]);
-  const [genderOptions, setGenderOptions] = useState([]);
 
-  // API'deki karakterleri kontrol edip benzersiz filtre değerlerini çek
+// Bu kısımda state'leri oluşturuyoruz ve uygulamanın filtreleme panelinin durumunu kontrol ediyoruz
+// ve filtreleme panelinin açık mı kapalı mı olduğunu, api'dan çekilen species, status ve genderları tutacak stateleri oluşturmuş oluyoruz.
+const [isOpen, setIsOpen] = useState(false);   
+const [speciesOptions, setSpeciesOptions] = useState([]);  
+const [statusOptions, setStatusOptions] = useState([]);    
+const [genderOptions, setGenderOptions] = useState([]);    
+
+  // Bu useEffect hook'u ile sayfa ilk yüklendiğinde API'den gerekli karakter verilerini çekiyoruz.
+  // Bu şekilde filtreleme panelindeki dropdown menülerini doldurabiliyoruz.
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
-        let speciesSet = new Set();
-        let statusSet = new Set();
-        let genderSet = new Set();
+        let speciesSet = new Set();  
+        let statusSet = new Set();   
+        let genderSet = new Set();   
 
         let url = "https://rickandmortyapi.com/api/character";
         let nextUrl = url;
 
+        // Pagination kontrolüyle tüm sayfalardan verileri çekiyoruz.
         while (nextUrl) {
           const response = await axios.get(nextUrl);
           const characters = response.data.results;
 
+          // Her karakter için belirtilen attribute'ları kontrol edip unique özellikleri setlere ekliyoruz.
           characters.forEach((character) => {
-            if (character.species) speciesSet.add(character.species);
-            if (character.status) statusSet.add(character.status);
-            if (character.gender) genderSet.add(character.gender);
+            if (character.species) speciesSet.add(character.species); 
+            if (character.status) statusSet.add(character.status);     
+            if (character.gender) genderSet.add(character.gender);  
           });
 
-          nextUrl = response.data.info.next;  // Pagination kontrolü için
+          nextUrl = response.data.info.next;  
         }
 
-        setSpeciesOptions(Array.from(speciesSet));
-        setStatusOptions(Array.from(statusSet));
+        // State'e benzersiz filtre seçeneklerini setliyoruz.
+        setSpeciesOptions(Array.from(speciesSet));  
+        setStatusOptions(Array.from(statusSet));  
         setGenderOptions(Array.from(genderSet));
 
       } catch (error) {
@@ -43,29 +51,34 @@ const FilterPanel = ({ setFilters, filters }) => {
     fetchCharacters();
   }, []);
 
+  // Input alanına yazıldığında veya dropdown seçildiğinde filtre state'ini güncelleyen fonksiyon.
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
+    // State güncellerken eski filtreleri koruyup yeni değeri setliyoruz.
     setFilters((prevFilters) => ({
       ...prevFilters,
-      [name]: prevFilters[name] === value ? '' : value
+      [name]: prevFilters[name] === value ? '' : value 
     }));
   };
 
   const handleDropdownChange = (e) => {
     const { name, value } = e.target;
 
+    // Dropdown seçim yapıldığında filtre state'ini güncelliyoruz.
     setFilters((prevFilters) => ({
       ...prevFilters,
-      [name]: value
+      [name]: value  // Yeni seçimi state'e ekliyoruz.
     }));
   };
 
   return (
     <div>
+
+      {/* Panel kapalı ise bu kısmı gösteriyoruz. */}
       {!isOpen && (
         <div
-          onClick={() => setIsOpen(true)}
+          onClick={() => setIsOpen(true)} 
           style={{
             position: 'fixed',
             top: '60px',
@@ -86,6 +99,7 @@ const FilterPanel = ({ setFilters, filters }) => {
         </div>
       )}
 
+      {/* Panel açık ise bu kısmı gösteriyoruz. */}
       {isOpen && (
         <div
           style={{
@@ -99,6 +113,8 @@ const FilterPanel = ({ setFilters, filters }) => {
             boxShadow: '2px 0px 10px rgba(0,0,0,0.3)',
           }}
         >
+
+          {/* Paneli kapatma butonu */}
           <button
             onClick={() => setIsOpen(false)}
             style={{
@@ -117,11 +133,11 @@ const FilterPanel = ({ setFilters, filters }) => {
 
           <h3>Filter Characters</h3>
 
-          {/* Filter by Character Name */}
+          {/* Filter by Character Name - Ad filtreleme inputu */}
           <input
             placeholder="Character Name"
             name="name"
-            onChange={handleInputChange}
+            onChange={handleInputChange}  // Input değiştiğinde state'i güncelleyen fonksiyon.
             style={{
               padding: '10px',
               width: '100%',
@@ -132,7 +148,7 @@ const FilterPanel = ({ setFilters, filters }) => {
             }}
           />
 
-          {/* Filter by Status */}
+          {/* Filter by Status - Dropdown seçimiyle durum filtrele */}
           <div style={{ marginTop: '15px' }}>
             <h4>Status</h4>
             <select
@@ -150,7 +166,7 @@ const FilterPanel = ({ setFilters, filters }) => {
             </select>
           </div>
 
-          {/* Filter by Gender */}
+          {/* Filter by Gender - Dropdown seçimiyle cinsiyet filtrele */}
           <div style={{ marginTop: '15px' }}>
             <h4>Gender</h4>
             <select
@@ -168,7 +184,7 @@ const FilterPanel = ({ setFilters, filters }) => {
             </select>
           </div>
 
-          {/* Filter by Species */}
+          {/* Filter by Species - Dropdown seçimiyle tür filtrele */}
           <div style={{ marginTop: '15px' }}>
             <h4>Species</h4>
             <select
