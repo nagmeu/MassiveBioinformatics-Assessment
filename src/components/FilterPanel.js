@@ -1,7 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const FilterPanel = ({ setFilters, filters }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [speciesOptions, setSpeciesOptions] = useState([]);
+  const [statusOptions, setStatusOptions] = useState([]);
+  const [genderOptions, setGenderOptions] = useState([]);
+
+  // API'deki karakterleri kontrol edip benzersiz filtre değerlerini çek
+  useEffect(() => {
+    const fetchCharacters = async () => {
+      try {
+        let speciesSet = new Set();
+        let statusSet = new Set();
+        let genderSet = new Set();
+
+        let url = "https://rickandmortyapi.com/api/character";
+        let nextUrl = url;
+
+        while (nextUrl) {
+          const response = await axios.get(nextUrl);
+          const characters = response.data.results;
+
+          characters.forEach((character) => {
+            if (character.species) speciesSet.add(character.species);
+            if (character.status) statusSet.add(character.status);
+            if (character.gender) genderSet.add(character.gender);
+          });
+
+          nextUrl = response.data.info.next;  // Pagination kontrolü için
+        }
+
+        setSpeciesOptions(Array.from(speciesSet));
+        setStatusOptions(Array.from(statusSet));
+        setGenderOptions(Array.from(genderSet));
+
+      } catch (error) {
+        console.error('Failed to fetch characters', error);
+      }
+    };
+
+    fetchCharacters();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +63,6 @@ const FilterPanel = ({ setFilters, filters }) => {
 
   return (
     <div>
-      {/* Toggle Button */}
       {!isOpen && (
         <div
           onClick={() => setIsOpen(true)}
@@ -47,7 +86,6 @@ const FilterPanel = ({ setFilters, filters }) => {
         </div>
       )}
 
-      {/* Filter Panel */}
       {isOpen && (
         <div
           style={{
@@ -61,7 +99,6 @@ const FilterPanel = ({ setFilters, filters }) => {
             boxShadow: '2px 0px 10px rgba(0,0,0,0.3)',
           }}
         >
-          {/* Close Button */}
           <button
             onClick={() => setIsOpen(false)}
             style={{
@@ -102,22 +139,10 @@ const FilterPanel = ({ setFilters, filters }) => {
               name="status"
               onChange={handleDropdownChange}
               value={filters.status}
-              style={{
-                padding: '10px',
-                width: '100%',
-                borderRadius: '5px',
-                fontSize: '16px',
-                boxSizing: 'border-box',
-                backgroundColor: '#fff',
-                border: '1px solid #ccc',
-                boxShadow: '0 0 5px rgba(0, 0, 0, 0.2)',
-                transition: '0.2s',
-              }}
-              onFocus={(e) => e.target.style.borderColor = '#666'}
-              onBlur={(e) => e.target.style.borderColor = '#ccc'}
+              style={{ padding: '10px', width: '100%', borderRadius: '5px' }}
             >
               <option value="">Select Status</option>
-              {['Alive', 'Dead', 'unknown'].map((status) => (
+              {statusOptions.map((status) => (
                 <option key={status} value={status}>
                   {status}
                 </option>
@@ -132,18 +157,10 @@ const FilterPanel = ({ setFilters, filters }) => {
               name="gender"
               onChange={handleDropdownChange}
               value={filters.gender}
-              style={{
-                padding: '10px',
-                width: '100%',
-                borderRadius: '5px',
-                fontSize: '16px',
-                boxSizing: 'border-box',
-                backgroundColor: '#fff',
-                border: '1px solid #ccc',
-              }}
+              style={{ padding: '10px', width: '100%', borderRadius: '5px' }}
             >
               <option value="">Select Gender</option>
-              {['Female', 'Male', 'Genderless', 'unknown'].map((gender) => (
+              {genderOptions.map((gender) => (
                 <option key={gender} value={gender}>
                   {gender}
                 </option>
@@ -158,16 +175,10 @@ const FilterPanel = ({ setFilters, filters }) => {
               name="species"
               onChange={handleDropdownChange}
               value={filters.species}
-              style={{
-                padding: '10px',
-                width: '100%',
-                borderRadius: '5px',
-                fontSize: '16px',
-                boxSizing: 'border-box',
-              }}
+              style={{ padding: '10px', width: '100%', borderRadius: '5px' }}
             >
               <option value="">Select Species</option>
-              {['Human', 'Alien', 'Robot', 'Unknown'].map((species) => (
+              {speciesOptions.map((species) => (
                 <option key={species} value={species}>
                   {species}
                 </option>
