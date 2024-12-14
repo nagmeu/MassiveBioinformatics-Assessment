@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+**📢 Massive Bioinformatics Assessment**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+https://nagmeu.github.io/MassiveBioinformatics_Assessment/
 
-## Available Scripts
+-TR-
 
-In the project directory, you can run:
+Bu projede, React kullanarak bir front end geliştirdim. Rick&Morty API'dan çektiğimiz verileri 4 kolondan oluşmakta olan tabloda karakterlerin fotoğrafları ve isimleri ile gösterdim. 
+Tabloda kaç karakterin görüntüleneceği sayfada verilmiş olan dropdown menüsünden seçilebilir. Bu seçimi text box yerine dropdown menüsü ile yapmamın sebebi ekranda daha düzenli bir görüntü olmasını
+istiyor oluşumdu.
 
-### `npm start`
+Aynı zamanda karakterlerin isimleri A'dan Z'ye ya da Z'den A'ya olacak şekilde sıralanabilir. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Ekranın solunda bulunan filters etiketine bastıktan sonra yanda açılacak menü ile karakterler isimlerine, cinsiyetlerine, hayatta olup olmama durumlarına ve türlerine göre filtreleme yapılabilir. 
+Filtrelemek için dropdown menüsü manuel değil, api'dan gelen bilgilere göre şekillenmektedir. Bu ekranda da daha düzenli ve modern bir görünüm için radio button yerine dropdown menü kullanmayı tercih ettim.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Filtreleme yapıldıktan sonra filtrelemelerin sonucundaki karakterler ekranın sağ tarafında filtreleme yapıldığı anda güncellenmektedir. Eğer belirtilen filtrelemelerin karşılığına denk gelen
+bir karakter yok ise, çıkacak pop-up ile belirtilen filtrelere karşılık gelen karakterin bulunamadığına dair uyarı vermektedir. 
 
-### `npm test`
+Karakter tablosunun en altında bulunan kısım ile ileri, geri, ilk sayfa, son sayfa ve istenilen sayfaya ulaşım sağlanmaktadır. Bu kısım filtreleme sonuçlarındaki karakter sayısına bağlı olarak
+kendini güncellemektedir. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Karakterlerin gösterildiği kutucuklara basıldığında ise karakterlerin detaylı bilgisi için karşımıza çıkan modal window ile farklı bir sekmeye yönlendirilmeden karakterlerin detaylı bilgilerinin 
+gözlemlenmesi amaçlanmıştır. Bu modal windowda karakterlerin isimleri, resimleri, hayatta olup olmadıklarına dair durumları, türleri, cinsiyetleri, lokasyonları ve ilk/son görüldükleri bölümler
+gözlemlenebilmektedir. 
 
-### `npm run build`
+-EN-
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In this project, I developed a front-end interface using React. We fetched data from the Rick and Morty API and displayed it in a four-column table containing the characters' photos and names. The number of characters displayed in the table can be selected from a dropdown menu on the page. I opted for a dropdown menu instead of a text box to maintain a cleaner and more organized visual layout.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Additionally, the characters can be sorted alphabetically by name in ascending or descending order.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+On the left side of the screen, clicking on the Filters tag opens a side menu. This menu allows users to filter characters based on their names, gender, alive/dead status, and species. To maintain a more organized and modern appearance, I chose a dropdown menu over radio buttons for filtering.
 
-### `npm run eject`
+After applying filters, the characters matching the specified criteria are dynamically updated on the right side of the screen. If no characters match the given filters, a pop-up message appears, notifying the user that no characters correspond to the selected filters.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+At the bottom of the character table, there is a pagination section that enables navigation to the next, previous, first, last, or a specific page. This section automatically updates according to the number of characters resulting from the filtering process.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+When a user clicks on the character boxes, a modal window pops up instead of redirecting to a new tab. This allows users to view detailed character information directly within the modal window. In this window, users can observe the characters' names, images, alive/dead status, species, gender, locations, and the sections where they were first/last seen.
