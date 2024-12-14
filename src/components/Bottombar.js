@@ -9,8 +9,7 @@ const Bottombar = () => {
       <p className="mb-0" style={{ fontSize: '14px' }}>
         Created by Nağme Uğurtan.<br />
         <a href="https://github.com/nagmeu" style={{ textDecoration: 'none' }}>https://github.com/nagmeu</a><br />
-        <a href="https://www.linkedin.com/in/nağme-uğurtan/" style={{ textDecoration: 'none' }}>https://www.linkedin.com/in/nağme-uğurtan/npm run build
-</a>
+        <a href="https://www.linkedin.com/in/nağme-uğurtan/" style={{ textDecoration: 'none' }}>https://www.linkedin.com/in/nağme-uğurtan</a>
       </p>
 
     </div>
