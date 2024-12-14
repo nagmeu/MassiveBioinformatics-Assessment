@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Massive-Bioinformatics/static/css/main.81b48a7f.css",
+    "main.js": "/Massive-Bioinformatics/static/js/main.45021444.js",
+    "index.html": "/Massive-Bioinformatics/index.html",
+    "main.81b48a7f.css.map": "/Massive-Bioinformatics/static/css/main.81b48a7f.css.map",
+    "main.45021444.js.map": "/Massive-Bioinformatics/static/js/main.45021444.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.81b48a7f.css",
+    "static/js/main.45021444.js"
+  ]
+}
