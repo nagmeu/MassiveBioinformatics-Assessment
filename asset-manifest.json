@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/MassiveBioinformatics-Assessment/static/css/main.81b48a7f.css",
+    "main.js": "/MassiveBioinformatics-Assessment/static/js/main.f2e12748.js",
+    "index.html": "/MassiveBioinformatics-Assessment/index.html",
+    "main.81b48a7f.css.map": "/MassiveBioinformatics-Assessment/static/css/main.81b48a7f.css.map",
+    "main.f2e12748.js.map": "/MassiveBioinformatics-Assessment/static/js/main.f2e12748.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.81b48a7f.css",
+    "static/js/main.f2e12748.js"
+  ]
+}
